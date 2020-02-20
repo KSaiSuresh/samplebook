@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "271506967440",
+    "firebase_url": "https://bookrn-81754.firebaseio.com",
+    "project_id": "bookrn-81754",
+    "storage_bucket": "bookrn-81754.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:271506967440:android:09bb2056eadd83a07e0115",
+        "android_client_info": {
+          "package_name": "com.example.bookren"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "271506967440-paig4pm5ecdcnglfgfo7ccf7a9d56h94.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bookren",
+            "certificate_hash": "1d5f54fe2eda21c7831bd9e47d6a7ed28a501eb0"
+          }
+        },
+        {
+          "client_id": "271506967440-hmnpimplq7dr7l6coq09s9fg087dvi7m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVwVIQ_jf6m3p6EhRSLTUxTnToVui5SF8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "271506967440-hmnpimplq7dr7l6coq09s9fg087dvi7m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
