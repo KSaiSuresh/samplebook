@@ -85,7 +85,7 @@ Button rbutton;
                             Toast.makeText(getApplicationContext(), "min password length is 8 and max is 13", Toast.LENGTH_SHORT).show();
                             Log.i("gggg",pass);
                         }
-
+    //;o;
 
                          else   if (TextUtils.isEmpty(cpass))
                             {
