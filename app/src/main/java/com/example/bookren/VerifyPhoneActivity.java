@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -31,29 +32,49 @@ public class VerifyPhoneActivity extends AppCompatActivity {
     private String mVerificationId;
     private EditText editTextCode;
     private FirebaseAuth mAuth;
-    String True="123";
-    String a,b,c,d;
+    String a,b,c,d,value="true";
+     String l="";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_phone);
+
+
+        value=getIntent().getStringExtra("key");
+        if(value.equals("false"))
+        {
+            Intent intent = getIntent();
+            final String mobile = intent.getStringExtra("mobile");
+            String name = intent.getStringExtra("name");
+            String email = intent.getStringExtra("email");
+            String pass = intent.getStringExtra("password");
+            String phno=intent.getStringExtra("phno");
+            a=name;
+            b=email;
+            c=pass;
+            d=phno;
+
+            sendVerificationCode(mobile);
+        }
+       else if (value.equals("true"))
+        {
+            String no =getIntent().getStringExtra("Phone");
+            l=getIntent().getStringExtra("now");
+
+            Log.i("hehe",l);
+            sendVerificationCode(no);
+        }
         mAuth = FirebaseAuth.getInstance();
         editTextCode = findViewById(R.id.editTextCode);
 
 
+
+
+
         //getting mobile number from the previous activity
         //and sending the verification code to the number
-        Intent intent = getIntent();
-        String mobile = intent.getStringExtra("mobile");
-        String name = intent.getStringExtra("name");
-        String email = intent.getStringExtra("email");
-        String pass = intent.getStringExtra("password");
-        String phno=intent.getStringExtra("phno");
-        a=name;
-        b=email;
-        c=pass;
-        d=phno;
-        sendVerificationCode(mobile);
+
+       //
 
 
         //if the automatic sms detection did not work, user can also enter the code manually
@@ -136,17 +157,26 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             //verification successful we will start the profile activity
-                            insertdb(a,b,c,d);
-                            Intent intent = new Intent(VerifyPhoneActivity.this, login.class);
+                            if (value.equals("true"))
+                            {
+                                Log.i("poo", l);
+                                Intent intent=new Intent(getApplicationContext(),PasswordReset.class);
 
+                                intent.putExtra("number",l);
+                                startActivity(intent);
+                                value="false";
+                                finish();
+                            }
+                            else
+                                {
+                                insertdb(a, b, c, d);
+                                Intent intent = new Intent(VerifyPhoneActivity.this, login.class);
+                                startActivity(intent);
+                            }
 
-
-
-
-
-                            startActivity(intent);
-
-                        } else {
+                        }
+                        else
+                            {
 
                             //verification unsuccessful.. display an error message
 
@@ -194,6 +224,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                                         Toast.makeText(getApplicationContext(),"User Registred",Toast.LENGTH_SHORT).show();
                                         Intent intent=new Intent(getApplicationContext(),login.class);
                                         startActivity(intent);
+                                        finish();
                                     }
                                     else
                                     {
@@ -214,6 +245,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError)
             {
+
 
             }
         });
